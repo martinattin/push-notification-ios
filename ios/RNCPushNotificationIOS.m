@@ -138,15 +138,13 @@ API_AVAILABLE(ios(10.0)) {
 {
   NSMutableDictionary *remoteNotification = [NSMutableDictionary dictionaryWithDictionary:notification.userInfo[@"notification"]];
   RNCRemoteNotificationCallback completionHandler = notification.userInfo[@"completionHandler"];
-  NSString *notificationId = [[NSUUID UUID] UUIDString];
-  remoteNotification[@"notificationId"] = notificationId;
   remoteNotification[@"remote"] = @YES;
   if (completionHandler) {
     if (!self.remoteNotificationCallbacks) {
       // Lazy initialization
       self.remoteNotificationCallbacks = [NSMutableDictionary dictionary];
     }
-    self.remoteNotificationCallbacks[notificationId] = completionHandler;
+    self.remoteNotificationCallbacks[remoteNotification[@"notificaton_data"][@"notificationId"]] = completionHandler;
   }
   
   [self sendEventWithName:@"remoteNotificationReceived" body:remoteNotification];
