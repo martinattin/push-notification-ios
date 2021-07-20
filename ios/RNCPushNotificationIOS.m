@@ -144,7 +144,7 @@ API_AVAILABLE(ios(10.0)) {
       // Lazy initialization
       self.remoteNotificationCallbacks = [NSMutableDictionary dictionary];
     }
-    self.remoteNotificationCallbacks[remoteNotification[@"notificaton_data"][@"notificationId"]] = completionHandler;
+    self.remoteNotificationCallbacks[remoteNotification[@"notification_data"][@"notificationId"]] = completionHandler;
   }
   
   [self sendEventWithName:@"remoteNotificationReceived" body:remoteNotification];
